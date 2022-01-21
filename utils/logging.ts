@@ -29,10 +29,10 @@ const localTransports = [new winston.transports.Console({ level: 'debug' })];
 
 const datadogTransport = new DatadogWinston({
     apiKey: DATADOG_API_KEY,
-    hostname: process.env.VERCEL_URL,
+    hostname: 'vercel',
     service: 'token-garden-logger',
     ddsource: 'nodejs',
-    ddtags: `env:${process.env.VERCEL_ENV}`,
+    ddtags: `env:${process.env.VERCEL_ENV}, git_sha:${process.env.VERCEL_GIT_COMMIT_SHA}, git_ref:${process.env.VERCEL_GIT_COMMIT_REF}`,
 });
 
 const prodTransports = [datadogTransport];
