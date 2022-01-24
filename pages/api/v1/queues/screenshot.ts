@@ -40,7 +40,7 @@ export default Queue(
 
             const metadata: Metadata = JSON.parse(metadataStr);
 
-            if (metadata.image.includes('ipfs://')) {
+            if (metadata.image.includes('ipfs://') && metadata.image !== imageIPFSPath) {
                 try {
                     logData.third_party_name = 'ipfs_remove';
                     await removeFromIPFS(metadata.image);
