@@ -2,7 +2,7 @@ import { Queue } from 'quirrel/next';
 
 import { fetcher, forceUpdateOpenSeaMetadata, ioredisClient } from '@utils';
 import { addToIPFS, removeFromIPFS } from '@utils/ipfs';
-import { LogData, logError, logger, logSuccess } from '@utils/logging';
+import { LogData, logError, logger, logSuccess, logWarning } from '@utils/logging';
 import { Metadata } from '@utils/metadata';
 
 import OpenseaForceUpdate from './openseaForceUpdate';
@@ -41,8 +41,16 @@ export default Queue(
             const metadata: Metadata = JSON.parse(metadataStr);
 
             if (metadata.image.includes('ipfs://')) {
-                logData.third_party_name = 'ipfs_remove';
-                await removeFromIPFS(metadata.image);
+                try {
+                    logData.third_party_name = 'ipfs_remove';
+                    await removeFromIPFS(metadata.image);
+                } catch (error) {
+                    if (error.message.includes('not pinned or pinned indirectly')) {
+                        logWarning(logData, error.message);
+                    } else {
+                        throw error;
+                    }
+                }
             }
 
             /*********************/
