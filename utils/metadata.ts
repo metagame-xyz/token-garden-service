@@ -26,7 +26,7 @@ export type NFTs = {
 /****************/
 export async function getNFTData(
     minterAddress: string,
-    network = networkStrings.etherscanAPI,
+    network = networkStrings.ethers,
 ): Promise<[NFTs, string]> {
     const address = minterAddress.toLowerCase();
     const etherscanProvider = new EtherscanProvider(network, ETHERSCAN_API_KEY);
@@ -43,12 +43,14 @@ export async function getNFTData(
             endblock: 'latest',
             page: page.toString(),
             offset: offset.toString(),
+            sort: 'desc',
         });
     }
 
     let totalResult = [];
 
-    while (eventsInLastPage === 1000) {
+    while (eventsInLastPage === 1000 && page <= 10) {
+        // page<=10 cuz etherscan only has 10 pages
         let status, message, result;
         try {
             ({ status, message, result } = await fetcher(getEtherscanUrl(page)));
