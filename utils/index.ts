@@ -139,17 +139,6 @@ export const isValidEventForwarderSignature = (request: NextApiRequest) => {
     hmac.update(JSON.stringify(body), 'utf8'); // Update the token hash with the request body using utf8
     const digest = hmac.digest('hex');
 
-    const logData: LogData = {
-        level: 'info',
-        function_name: 'isValidEventForwarderSignature',
-        message: 'validating event forwarder signature',
-    };
-    logWarning(
-        logData,
-        `auth token ${EVENT_FORWARDER_AUTH_TOKEN} signature: ${signature} digest: ${digest} headers: ${JSON.stringify(
-            headers,
-        )} body: ${JSON.stringify(body)}`,
-    );
     return signature === digest;
 };
 
