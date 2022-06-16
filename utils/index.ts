@@ -142,11 +142,14 @@ export const isValidEventForwarderSignature = (request: NextApiRequest) => {
     const logData: LogData = {
         level: 'info',
         function_name: 'isValidEventForwarderSignature',
-        message: `auth token ${EVENT_FORWARDER_AUTH_TOKEN} signature: ${signature} digest: ${digest} headers: ${JSON.stringify(
+        message: 'validating event forwarder signature',
+    };
+    logWarning(
+        logData,
+        `auth token ${EVENT_FORWARDER_AUTH_TOKEN} signature: ${signature} digest: ${digest} headers: ${JSON.stringify(
             headers,
         )} body: ${JSON.stringify(body)}`,
-    };
-    logError(logData, 'isValidEventForwarderSignature Error');
+    );
     return signature === digest;
 };
 
