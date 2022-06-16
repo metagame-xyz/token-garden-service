@@ -138,6 +138,15 @@ export const isValidEventForwarderSignature = (request: NextApiRequest) => {
     const hmac = createHmac('sha256', token); // Create a HMAC SHA256 hash using the auth token
     hmac.update(JSON.stringify(body), 'utf8'); // Update the token hash with the request body using utf8
     const digest = hmac.digest('hex');
+
+    const logData: LogData = {
+        level: 'info',
+        function_name: 'isValidEventForwarderSignature',
+        message: `auth token ${EVENT_FORWARDER_AUTH_TOKEN} signature: ${signature} digest: ${digest} headers: ${JSON.stringify(
+            headers,
+        )} body: ${JSON.stringify(body)}`,
+    };
+    logError(logData, 'isValidEventForwarderSignature Error');
     return signature === digest;
 };
 
