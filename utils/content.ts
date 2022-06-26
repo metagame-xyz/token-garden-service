@@ -24,7 +24,7 @@ export const copy = {
     text2: 'The number, size, and color of flowers in your garden is based on your on-chain data instead of an artificial limit.',
     heading3: 'Minted, not Purchased',
     text3: 'Token Gardens are based on the NFTs you’ve minted, not purchased. You can’t buy your way to a full garden, you have to grow it!',
-    bottomSectonHeading: 'The Metagame',
+    bottomSectonHeading: 'Metagame',
     bottomSectionText:
         'Token Garden is the second NFT in an infinite series of achievements you earn by playing a game many of us are already playing whether we know it or not: The Metagame. These earned achievements will allow access to private spaces gated by shared experiences. Each achievement will contribute to leveling up your character. Follow along: ',
 };

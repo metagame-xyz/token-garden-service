@@ -311,7 +311,7 @@ function Home({ metadata: metadataStr }) {
                 </Heading>
                 <Text mt={4} fontWeight="light" maxW="xl">
                     {copy.bottomSectionText}
-                    <Link isExternal href={'https://twitter.com/The_Metagame'}>
+                    <Link isExternal href={'https://twitter.com/Metagame'}>
                         @The_Metagame
                     </Link>
                 </Text>
