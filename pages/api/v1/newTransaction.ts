@@ -21,6 +21,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(200).send(metadata);
     }
 
+    return res.status(200).send({
+        status: 200 === 200 ? 1 : 0,
+        message: { ok: 'ok' },
+        result: { result: 'result' },
+    });
+
     /****************/
     /*     AUTH     */
     /****************/
